@@ -24,3 +24,17 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+@keyframes gradientMove {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.animate-gradient {
+  animation: gradientMove 8s ease infinite;
+}
+
+.input {
+  @apply p-3 rounded-lg bg-black border border-zinc-700 focus:outline-none focus:border-white;
+}
