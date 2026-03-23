@@ -43,12 +43,14 @@ const About = forwardRef<HTMLElement, AboutProps>(
             In addition to my academic background, I’ve worked on freelance projects and continuously improve my skills through hands-on development.
           </motion.p>
 
-          <button
-            onClick={onOpenModal}
-            className="mt-6 px-6 py-3 border border-white text-white rounded-xl hover:bg-white hover:text-black transition cursor-pointer"
+          <motion.button
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
+          onClick={onOpenModal}
+          className="mt-6 px-6 py-3 border border-zinc-700 text-zinc-300 rounded-xl hover:bg-white hover:text-black hover:border-white transition cursor-pointer"
           >
             Get in touch
-          </button>
+          </motion.button>
         </motion.div>
       </section>
     );
