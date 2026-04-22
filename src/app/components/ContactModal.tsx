@@ -3,46 +3,12 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
 import emailjs from "emailjs-com";
+import { useLanguage } from "../../context/LanguageContext";
+import { translations } from "../../lib/translations";
 
 export default function ContactModal({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) {
-
-    const handleSubmit = (e: any) => {
-        
-        e.preventDefault();
-
-        setStatus("loading");
-        
-        emailjs.send(
-            "service_uo5ys1p",
-            "template_zn1rc7q",
-            {
-            name,
-            email,
-            phone,
-            subject,
-            message,
-            },
-            "mObZo3f4G59WTTIV7"
-        )
-        .then(() => {
-            setStatus("success");
-
-            setName("");
-            setEmail("");
-            setPhone("");
-            setSubject("");
-            setMessage("");
-
-            setTimeout(() => {
-                onClose();
-                setStatus("idle");
-            }, 1500);
-        })
-        .catch(() => {
-            setStatus("error");
-        });
-
-    };
+    const { lang } = useLanguage();
+    const t = translations[lang as keyof typeof translations];
 
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
@@ -51,11 +17,28 @@ export default function ContactModal({ isOpen, onClose }: { isOpen: boolean; onC
     const [message, setMessage] = useState("");
     const [status, setStatus] = useState("idle");
 
+    const handleSubmit = (e: any) => {
+        e.preventDefault();
+        setStatus("loading");
+
+        emailjs.send(
+            "service_uo5ys1p",
+            "template_zn1rc7q",
+            { name, email, phone, subject, message },
+            "mObZo3f4G59WTTIV7"
+        )
+        .then(() => {
+            setStatus("success");
+            setName(""); setEmail(""); setPhone(""); setSubject(""); setMessage("");
+            setTimeout(() => { onClose(); setStatus("idle"); }, 1500);
+        })
+        .catch(() => { setStatus("error"); });
+    };
+
     return (
         <AnimatePresence>
             {isOpen && (
                 <>
-                    {/* Overlay */}
                     <motion.div
                         className="fixed inset-0 bg-black/60 backdrop-blur-sm z-50"
                         initial={{ opacity: 0 }}
@@ -63,8 +46,6 @@ export default function ContactModal({ isOpen, onClose }: { isOpen: boolean; onC
                         exit={{ opacity: 0 }}
                         onClick={onClose}
                     />
-
-                    {/* Modal */}
                     <motion.div
                         className="fixed inset-0 flex items-center justify-center z-50 px-4"
                         initial={{ opacity: 0, scale: 0.9, y: 50 }}
@@ -82,30 +63,24 @@ export default function ContactModal({ isOpen, onClose }: { isOpen: boolean; onC
                                 ✕
                             </button>
 
-                            <h2 className="text-2xl font-bold mb-4">Contact Me</h2>
+                            <h2 className="text-2xl font-bold mb-4">{t.modalTitle}</h2>
 
                             <form onSubmit={handleSubmit} className="flex flex-col gap-4">
-                                <input type="text" placeholder="Name" value={name} className="input p-1 border border-zinc-400 rounded-lg" onChange={(e) => setName(e.target.value)} />
-                                <input type="email" placeholder="Email" value={email}  className="input p-1 border border-zinc-400 rounded-lg" onChange={(e) => setEmail(e.target.value)} />
-                                <input type="tel" placeholder="Phone Number" value={phone} className="input p-1 border border-zinc-400 rounded-lg" onChange={(e) => setPhone(e.target.value)} />
-                                <input type="text" placeholder="Subject" value={subject} className="input p-1 border border-zinc-400 rounded-lg" onChange={(e) => setSubject(e.target.value)} />
-                                <textarea placeholder="Message" rows={4} value={message} className="input p-1 border border-zinc-400 rounded-lg" onChange={(e) => setMessage(e.target.value)} />
+                                <input type="text" placeholder={t.modalName} value={name} className="input p-1 border border-zinc-400 rounded-lg bg-transparent" onChange={(e) => setName(e.target.value)} />
+                                <input type="email" placeholder={t.modalEmail} value={email} className="input p-1 border border-zinc-400 rounded-lg bg-transparent" onChange={(e) => setEmail(e.target.value)} />
+                                <input type="tel" placeholder={t.modalPhone} value={phone} className="input p-1 border border-zinc-400 rounded-lg bg-transparent" onChange={(e) => setPhone(e.target.value)} />
+                                <input type="text" placeholder={t.modalSubject} value={subject} className="input p-1 border border-zinc-400 rounded-lg bg-transparent" onChange={(e) => setSubject(e.target.value)} />
+                                <textarea placeholder={t.modalMessage} rows={4} value={message} className="input p-1 border border-zinc-400 rounded-lg bg-transparent" onChange={(e) => setMessage(e.target.value)} />
                                 <button
                                     type="submit"
                                     disabled={status === "loading"}
                                     className="mt-2 bg-white text-black py-3 rounded-lg font-semibold hover:bg-zinc-400 transition cursor-pointer disabled:opacity-50"
                                 >
-                                    {status === "loading" ? "Sending..." : "Send Message"}
+                                    {status === "loading" ? (lang === "en" ? "Sending..." : "Enviando...") : t.modalSend}
                                 </button>
 
-                                {status === "success" && (
-                                    <p className="text-green-400 text-sm">Message sent successfully!</p>
-                                )}
-
-                                {status === "error" && (
-                                    <p className="text-red-400 text-sm">Something went wrong ❌</p>
-                                )}
-
+                                {status === "success" && <p className="text-green-400 text-sm">{t.modalSuccess}</p>}
+                                {status === "error" && <p className="text-red-400 text-sm">{t.modalError}</p>}
                             </form>
                         </div>
                     </motion.div>

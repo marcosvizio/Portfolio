@@ -2,6 +2,9 @@
 
 import { forwardRef } from "react";
 import { motion } from "framer-motion";
+import { useLanguage } from "../../context/LanguageContext";
+import { translations } from "../../lib/translations";
+import { FaGithub, FaLinkedin } from "react-icons/fa";
 
 type AboutProps = {
   onOpenModal: () => void;
@@ -9,43 +12,45 @@ type AboutProps = {
 
 const Contact = forwardRef<HTMLElement, AboutProps>(
   ({ onOpenModal }, ref) => {
+    const { lang } = useLanguage();
+    const t = translations[lang as keyof typeof translations];
     return (
       <section id="contact" ref={ref} className="h-screen max-w-3xl mx-auto py-20 text-center flex flex-col items-center justify-center text-center">
-        <h2 className="text-4xl text-center font-bold">Let’s work together</h2>
+        <h2 className="text-4xl text-center font-bold">{t.contactTitle}</h2>
 
         <p className="text-gray-400 mt-4">
-          Have a project in mind or looking for a developer? I’d love to hear about it.
+          {t.contactSubtitle}
         </p>
         <p className="text-gray-400 mt-4">
-          I’m always open to new opportunities where I can contribute, learn, and grow — whether it's building a full web application, improving an existing product, or collaborating as part of a team.
+          {t.contactSubtitle2}
         </p>
         <p className="text-gray-400 mt-4">
-          If you’re looking for someone who is proactive, detail-oriented, and passionate about development, feel free to reach out. I’ll get back to you as soon as possible.
+          {t.contactSubtitle3}
         </p>
         <p className="text-gray-400 mt-4">
-          Let’s create something great together!
+          {t.contactSubtitle4}
         </p>
 
 
         <div className="flex gap-4 mt-6">
           <motion.a
-            whileHover={{ scale: 1.05 }}
+            whileHover={{ scale: 1.2 }}
             whileTap={{ scale: 0.95 }}
             href="https://www.linkedin.com/in/marcos-vizio/"
             target="_blank"
-            className="px-5 py-2 border border-zinc-700 rounded-xl text-sm text-zinc-300 hover:text-black hover:bg-white hover:border-white transition"
+            className="px-5 py-2 border border-zinc-700 rounded-xl text-lg text-zinc-300 hover:text-black hover:bg-white hover:border-white transition"
           >
-            LinkedIn
+            <FaLinkedin />
           </motion.a>
 
           <motion.a
-            whileHover={{ scale: 1.05 }}
+            whileHover={{ scale: 1.2 }}
             whileTap={{ scale: 0.95 }}
             href="https://github.com/marcosvizio"
             target="_blank"
-            className="px-5 py-2 border border-zinc-700 rounded-xl text-sm text-zinc-300 hover:text-black hover:bg-white hover:border-white transition"
+            className="px-5 py-2 border border-zinc-700 rounded-xl text-lg text-zinc-300 hover:text-black hover:bg-white hover:border-white transition"
           >
-            GitHub
+            <FaGithub />
           </motion.a>
         </div>
 

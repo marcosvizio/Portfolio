@@ -1,34 +1,40 @@
 "use client";
 
+import { translations } from "../../lib/translations";
+import { useLanguage } from "../../context/LanguageContext";
+
 export default function Navbar({ active }: { active: string }) {
-    /* Logica para iluminacion de navbar segun section*/
     const base = "transition-colors duration-300";
     const activeStyle = "text-blue-500 font-bold";
     const inactiveStyle = "text-white";
 
-    /* Logica para animacion del scroll */
-    const scrollToSection = (id:any) => {
-        const element = document.getElementById(id);
+    const { lang, setLang } = useLanguage();
+    const t = translations[lang as keyof typeof translations];
 
-        element?.scrollIntoView({
-            behavior: "smooth",
-            block: "start",
-        });
+    const scrollToSection = (id: any) => {
+        const element = document.getElementById(id);
+        element?.scrollIntoView({ behavior: "smooth", block: "start" });
     };
 
     return (
         <nav className="fixed top-0 w-full flex justify-between items-center p-8 z-50">
             <h1 className="text-xl font-semibold">&lt;MV/&gt;</h1>
 
-            <div className="space-x-6 text-base">
+            <div className="space-x-6 text-base flex items-center">
                 <button className={`cursor-pointer hover:text-gray-400 hover:font-bold ${base} ${active === "about" ? activeStyle : inactiveStyle}`} onClick={() => scrollToSection("about")}>
-                    About
+                    {t.navbarAbout}
                 </button>
                 <button className={`cursor-pointer hover:text-gray-400 hover:font-bold ${base} ${active === "projects" ? activeStyle : inactiveStyle}`} onClick={() => scrollToSection("projects")}>
-                    Projects
+                    {t.navbarProjects}
                 </button>
                 <button className={`cursor-pointer hover:text-gray-400 hover:font-bold ${base} ${active === "contact" ? activeStyle : inactiveStyle}`} onClick={() => scrollToSection("contact")}>
-                    Contact
+                    {t.navbarContact}
+                </button>
+                <button
+                    onClick={() => setLang(lang === "en" ? "es" : "en")}
+                    className="ml-2 px-3 py-1 rounded-full border border-zinc-600 text-zinc-300 hover:border-white hover:text-white transition text-sm font-semibold cursor-pointer"
+                >
+                    {lang === "en" ? "ES" : "EN"}
                 </button>
             </div>
         </nav>

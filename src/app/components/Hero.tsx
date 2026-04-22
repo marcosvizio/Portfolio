@@ -1,9 +1,14 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { useLanguage } from "../../context/LanguageContext";
+import { translations } from "../../lib/translations";
 
 export default function Hero() {
-  return (
+    const { lang } = useLanguage();
+    const t = translations[lang as keyof typeof translations];
+
+    return (
     <section className="h-screen flex flex-col items-center justify-center text-center overflow-hidden">
 
         {/* Fondo Animado Hero Section*/}
@@ -11,15 +16,16 @@ export default function Hero() {
 
         {/* Contenido Hero Section */}
         <div className="z-100">
-            <motion.img
-                src="/foto_marcos.jpg"
-                alt="Marcos"
-                className="w-80 h-80 rounded-full object-cover mb-6"
-                initial={{ scale: 0 }}
-                animate={{ scale: 1 }}
-                transition={{ duration: 1 }}
-            />
-
+            <div className="flex justify-center">
+                <motion.img
+                    src="/foto_marcos.jpg"
+                    alt="Marcos"
+                    className="w-60 h-60 rounded-full object-cover mb-6"
+                    initial={{ scale: 0 }}
+                    animate={{ scale: 1 }}
+                    transition={{ duration: 1 }}
+                />
+            </div>
             <motion.h1
                 className="text-5xl font-bold"
                 initial={{ opacity: 0, y: 20 }}
@@ -33,7 +39,7 @@ export default function Hero() {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
             >
-                Full Stack Developer
+                {t.heroSubtitle}
             </motion.p>
         </div>
 
