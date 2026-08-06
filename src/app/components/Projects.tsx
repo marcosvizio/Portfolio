@@ -1,36 +1,55 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { SiPhp } from "react-icons/si";
+import { FaArrowUpRightFromSquare } from "react-icons/fa6";
 import { useLanguage } from "../../context/LanguageContext";
 import { translations } from "../../lib/translations";
 
-const TECH_COLORS: Record<string, string> = {
-  "WordPress":    "bg-blue-900 text-blue-200",
-  "WooCommerce":  "bg-purple-900 text-purple-200",
-  "Elementor":    "bg-pink-900 text-pink-200",
-  "Meta Pixel":   "bg-blue-800 text-blue-100",
-  "Google Analytics": "bg-yellow-900 text-yellow-200",
-  "MS Clarity":   "bg-cyan-900 text-cyan-200",
-  "Zapier":       "bg-orange-900 text-orange-200",
-  "Brevo":        "bg-emerald-900 text-emerald-200",
-  "Next.js":      "bg-zinc-800 text-zinc-100",
-  "React":        "bg-sky-900 text-sky-200",
-  "TypeScript":   "bg-blue-700 text-blue-100",
-  "OpenAI API":   "bg-green-900 text-green-200",
-  "Node.js":      "bg-green-800 text-green-100",
-  "Express.js":   "bg-zinc-700 text-zinc-100",
-  "JWT":          "bg-rose-900 text-rose-200",
-  "Passport.js":  "bg-indigo-900 text-indigo-200",
-  "SQL Server":   "bg-red-900 text-red-200",
-  "Nodemailer":   "bg-teal-900 text-teal-200",
-  "MongoDB":      "bg-green-700 text-green-100",
-  "Handlebars":   "bg-amber-900 text-amber-200",
+type TechAsset = {
+  image?: string;
+  Icon?: React.ComponentType<{ size?: number; className?: string }>;
+};
+
+const TECH_ASSETS: Record<string, TechAsset> = {
+  "WordPress": { image: "/wordpress_blue_logo.png" },
+  "WooCommerce": { image: "/woocommerce_logo.png" },
+  "Elementor": { image: "/elementor_logo.png" },
+  "ACF": {},
+  "PHP": { Icon: SiPhp },
+  "CPT": {},
+  "Meta Pixel": { image: "/meta_logo.png" },
+  "Google Analytics": { image: "/google_logo.png" },
+  "MS Clarity": { image: "/clarity_logo.png" },
+  "Zapier": { image: "/zapier_logo.png" },
+  "Brevo": { image: "/brevo_logo.png" },
+  "Next.js": { image: "/nextjs_logo.png" },
+  "React": { image: "/react_logo.png" },
+  "TypeScript": { image: "/typescript_logo.png" },
+  "OpenAI API": { image: "/openai_logo.png" },
+  "Node.js": { image: "/nodejs_logo.png" },
+  "Express.js": { image: "/expressjs_logo.png" },
+  "JWT": { image: "/jwt_logo.png" },
+  "Passport.js": { image: "/passport_logo.png" },
+  "SQL Server": { image: "/sqlserver_logo.png" },
+  "Nodemailer": { image: "/nodemailer_logo.webp" },
+  "MongoDB": { image: "/mongodb_logo.png" },
+  "Handlebars": { image: "/handlebars_logo.webp" },
 };
 
 function TechPill({ name }: { name: string }) {
-  const color = TECH_COLORS[name] ?? "bg-zinc-700 text-zinc-200";
+  const asset = TECH_ASSETS[name];
   return (
-    <span className={`text-xs font-medium px-3 py-1 rounded-full ${color}`}>
+    <span className="flex items-center gap-1.5 pl-1.5 pr-3 py-1 rounded-full bg-white/5 border border-white/10 text-xs font-medium text-zinc-200">
+      {asset?.image ? (
+        <img src={asset.image} alt={name} className="w-4 h-4 object-contain rounded-sm" />
+      ) : asset?.Icon ? (
+        <asset.Icon size={14} className="text-zinc-300" />
+      ) : (
+        <span className="w-4 h-4 flex items-center justify-center rounded-sm bg-linear-to-br from-cyan-400/30 to-violet-500/30 text-[8px] font-bold">
+          {name.slice(0, 2).toUpperCase()}
+        </span>
+      )}
       {name}
     </span>
   );
@@ -41,6 +60,12 @@ export default function Projects({ ref }: any) {
   const t = translations[lang as keyof typeof translations];
 
   const projects = [
+    {
+      title: t.project6Title,
+      descriptions: [t.project6Description, t.project6Description2],
+      link: "https://cabarco.org",
+      techs: ["WordPress", "Elementor", "WooCommerce", "ACF", "PHP", "CPT"],
+    },
     {
       title: t.project1Title,
       descriptions: [t.project1Description, t.project1Description2],
@@ -80,44 +105,60 @@ export default function Projects({ ref }: any) {
   ];
 
   return (
-    <section id="projects" ref={ref} className="py-32 px-6">
-      <h2 className="text-4xl text-center font-bold mb-16">{t.projectsTitle}</h2>
+    <section id="projects" ref={ref} className="relative py-28 md:py-32 px-6">
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6 }}
+        viewport={{ once: true }}
+        className="text-center mb-14"
+      >
+        <span className="text-xs font-semibold tracking-[0.2em] uppercase text-cyan-300/80">
+          {t.projectsEyebrow}
+        </span>
+        <h2 className="text-3xl md:text-4xl font-bold mt-3">{t.projectsTitle}</h2>
+      </motion.div>
 
-      <div className="grid md:grid-cols-2 gap-10 max-w-5xl mx-auto">
+      <div className="grid md:grid-cols-2 gap-6 max-w-5xl mx-auto">
         {projects.map((project, i) => (
           <motion.div
             key={i}
-            whileHover={{ scale: 1.02 }}
-            className="p-6 border border-zinc-700 rounded-xl flex flex-col gap-3"
+            whileHover={{ y: -4 }}
+            className="glass-card glass-card-hover rounded-2xl p-7 flex flex-col gap-3"
             initial={{ opacity: 0, y: 50 }}
             whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: i * 0.05 }}
+            transition={{ duration: 0.6, delay: (i % 2) * 0.08 }}
             viewport={{ once: true }}
           >
+            <div className="h-1 w-14 rounded-full bg-linear-to-r from-cyan-400 to-violet-500" />
+
             <h3 className="text-xl font-semibold">{project.title}</h3>
 
             {project.descriptions.map((desc, j) => (
-              <p key={j} className="text-gray-400 text-sm">{desc}</p>
+              <p key={j} className="text-zinc-400 text-sm leading-relaxed">{desc}</p>
             ))}
 
             {project.links && (
-              <ul className="text-gray-400 text-sm space-y-1">
+              <ul className="text-zinc-400 text-sm space-y-1">
                 {project.links.map((l) => (
                   <li key={l.url}>
-                    • <a href={l.url} className="text-blue-300 hover:underline" target="_blank" rel="noopener noreferrer">{l.label}</a>
+                    • <a href={l.url} className="text-cyan-300 hover:text-cyan-200 hover:underline" target="_blank" rel="noopener noreferrer">{l.label}</a>
                   </li>
                 ))}
               </ul>
             )}
 
-            <p className="text-gray-400 text-sm">
-              {lang === "en" ? "Live Site:" : "Sitio:"}{" "}
-              <a href={project.link} className="text-blue-500 hover:underline" target="_blank" rel="noopener noreferrer">
-                {lang === "en" ? "Click Here" : "Ver aquí"}
-              </a>
-            </p>
+            <a
+              href={project.link}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1.5 text-sm font-medium text-cyan-300 hover:text-cyan-200 transition-colors w-fit"
+            >
+              {lang === "en" ? "Visit live site" : "Ver sitio en vivo"}
+              <FaArrowUpRightFromSquare size={11} />
+            </a>
 
-            <div className="flex flex-wrap gap-2 mt-2">
+            <div className="flex flex-wrap gap-2 mt-1">
               {project.techs.map((tech) => (
                 <TechPill key={tech} name={tech} />
               ))}

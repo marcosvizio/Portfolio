@@ -40,7 +40,7 @@ export default function ContactModal({ isOpen, onClose }: { isOpen: boolean; onC
             {isOpen && (
                 <>
                     <motion.div
-                        className="fixed inset-0 bg-black/60 backdrop-blur-sm z-50"
+                        className="fixed inset-0 bg-black/70 backdrop-blur-sm z-50"
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
                         exit={{ opacity: 0 }}
@@ -53,9 +53,11 @@ export default function ContactModal({ isOpen, onClose }: { isOpen: boolean; onC
                         exit={{ opacity: 0, scale: 0.9, y: 50 }}
                     >
                         <div
-                            className="bg-zinc-900 text-white w-full max-w-lg rounded-2xl p-6 relative"
+                            className="glass-card bg-zinc-950/90 text-white w-full max-w-lg rounded-2xl p-6 relative"
                             onClick={(e) => e.stopPropagation()}
                         >
+                            <div className="absolute -top-16 -right-16 w-40 h-40 rounded-full bg-cyan-500/20 blur-3xl pointer-events-none" />
+
                             <button
                                 onClick={onClose}
                                 className="absolute top-4 right-4 text-zinc-400 hover:text-white cursor-pointer text-2xl font-bold"
@@ -63,23 +65,23 @@ export default function ContactModal({ isOpen, onClose }: { isOpen: boolean; onC
                                 ✕
                             </button>
 
-                            <h2 className="text-2xl font-bold mb-4">{t.modalTitle}</h2>
+                            <h2 className="text-2xl font-bold mb-4 text-gradient">{t.modalTitle}</h2>
 
                             <form onSubmit={handleSubmit} className="flex flex-col gap-4">
-                                <input type="text" placeholder={t.modalName} value={name} className="input p-1 border border-zinc-400 rounded-lg bg-transparent" onChange={(e) => setName(e.target.value)} />
-                                <input type="email" placeholder={t.modalEmail} value={email} className="input p-1 border border-zinc-400 rounded-lg bg-transparent" onChange={(e) => setEmail(e.target.value)} />
-                                <input type="tel" placeholder={t.modalPhone} value={phone} className="input p-1 border border-zinc-400 rounded-lg bg-transparent" onChange={(e) => setPhone(e.target.value)} />
-                                <input type="text" placeholder={t.modalSubject} value={subject} className="input p-1 border border-zinc-400 rounded-lg bg-transparent" onChange={(e) => setSubject(e.target.value)} />
-                                <textarea placeholder={t.modalMessage} rows={4} value={message} className="input p-1 border border-zinc-400 rounded-lg bg-transparent" onChange={(e) => setMessage(e.target.value)} />
+                                <input type="text" placeholder={t.modalName} value={name} className="input" onChange={(e) => setName(e.target.value)} />
+                                <input type="email" placeholder={t.modalEmail} value={email} className="input" onChange={(e) => setEmail(e.target.value)} />
+                                <input type="tel" placeholder={t.modalPhone} value={phone} className="input" onChange={(e) => setPhone(e.target.value)} />
+                                <input type="text" placeholder={t.modalSubject} value={subject} className="input" onChange={(e) => setSubject(e.target.value)} />
+                                <textarea placeholder={t.modalMessage} rows={4} value={message} className="input" onChange={(e) => setMessage(e.target.value)} />
                                 <button
                                     type="submit"
                                     disabled={status === "loading"}
-                                    className="mt-2 bg-white text-black py-3 rounded-lg font-semibold hover:bg-zinc-400 transition cursor-pointer disabled:opacity-50"
+                                    className="btn-gradient mt-2 py-3 rounded-lg cursor-pointer disabled:opacity-50"
                                 >
                                     {status === "loading" ? (lang === "en" ? "Sending..." : "Enviando...") : t.modalSend}
                                 </button>
 
-                                {status === "success" && <p className="text-green-400 text-sm">{t.modalSuccess}</p>}
+                                {status === "success" && <p className="text-emerald-400 text-sm">{t.modalSuccess}</p>}
                                 {status === "error" && <p className="text-red-400 text-sm">{t.modalError}</p>}
                             </form>
                         </div>

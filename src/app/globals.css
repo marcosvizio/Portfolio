@@ -1,29 +1,45 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #05050a;
+  --foreground: #ededed;
+  --accent-cyan: #22d3ee;
+  --accent-violet: #8b5cf6;
+  --accent-gradient: linear-gradient(120deg, var(--accent-cyan), var(--accent-violet));
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  --color-accent-cyan: var(--accent-cyan);
+  --color-accent-violet: var(--accent-violet);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
+    --background: #05050a;
     --foreground: #ededed;
   }
+}
+
+* {
+  scrollbar-color: var(--accent-violet) transparent;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans), Arial, Helvetica, sans-serif;
 }
+
+::selection {
+  background: var(--accent-violet);
+  color: #fff;
+}
+
+/* Fondos y texturas */
 
 @keyframes gradientMove {
   0% { background-position: 0% 50%; }
@@ -32,9 +48,67 @@ body {
 }
 
 .animate-gradient {
-  animation: gradientMove 8s ease infinite;
+  animation: gradientMove 10s ease infinite;
+}
+
+@keyframes blobFloat {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33% { transform: translate(4%, -6%) scale(1.08); }
+  66% { transform: translate(-3%, 4%) scale(0.95); }
+}
+
+.animate-blob {
+  animation: blobFloat 16s ease-in-out infinite;
+}
+
+.animate-blob-slow {
+  animation: blobFloat 22s ease-in-out infinite reverse;
+}
+
+.bg-grid {
+  background-image:
+    linear-gradient(to right, rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+  background-size: 48px 48px;
+}
+
+/* Texto con gradiente de acento */
+.text-gradient {
+  background-image: var(--accent-gradient);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Tarjetas de vidrio (glassmorphism) */
+.glass-card {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+}
+
+.glass-card-hover {
+  transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+.glass-card-hover:hover {
+  border-color: rgba(139, 92, 246, 0.5);
+  box-shadow: 0 0 0 1px rgba(34, 211, 238, 0.15), 0 20px 40px -20px rgba(139, 92, 246, 0.35);
+}
+
+/* Botón con gradiente de acento */
+.btn-gradient {
+  background-image: var(--accent-gradient);
+  color: #05050a;
+  font-weight: 600;
+  transition: filter 0.2s ease, transform 0.2s ease;
+}
+
+.btn-gradient:hover {
+  filter: brightness(1.1);
 }
 
 .input {
-  @apply p-3 rounded-lg bg-black border border-zinc-700 focus:outline-none focus:border-white;
+  @apply p-3 rounded-lg bg-white/5 border border-zinc-700 focus:outline-none focus:border-cyan-400/60 transition-colors;
 }

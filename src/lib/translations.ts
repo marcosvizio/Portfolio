@@ -2,15 +2,32 @@ export const translations = {
   en: {
     /* NAVBAR */
     navbarAbout: "About",
+    navbarSkills: "Skills",
     navbarProjects: "Projects",
     navbarContact: "Contact",
     /* HERO */
-    heroSubtitle: "Systems Analist & Full Stack Developer",
+    heroGreeting: "Hello, I'm",
+    heroSubtitle: "Systems Analyst & Full Stack Developer",
+    heroCTAProjects: "View Projects",
+    heroCTAContact: "Get in Touch",
     /* ABOUT */
+    aboutEyebrow: "Get to know me",
     aboutTitle: "About Me",
     aboutDescription1: "I specialize in building scalable web applications using modern technologies like React, Node.js, and both SQL and NoSQL databases. I have hands-on experience developing real-world projects, including task management systems, AI-powered lead qualification tools, and web platforms with authentication, file uploads, and automated workflows.",
     aboutDescription2: "I graduated as a Systems Analyst from IFTS N°18, where I developed a strong foundation in database management, software architecture, and information security. In addition to my academic background, I've worked on freelance projects and continuously improve my skills through hands-on development.",
     aboutButton: "Get in touch!",
+    aboutStatDegree: "Systems Analyst degree",
+    aboutStatProjects: "Real-world projects shipped",
+    aboutStatFocus: "Web development focus",
+    /* SKILLS */
+    skillsEyebrow: "What I work with",
+    skillsTitle: "Skills & Technologies",
+    skillsCatFrontend: "Frontend",
+    skillsCatBackend: "Backend & APIs",
+    skillsCatDatabases: "Databases",
+    skillsCatCms: "CMS & E-commerce",
+    skillsCatAuth: "Auth & Utilities",
+    skillsCatMarketing: "Marketing & Automation",
     /* MODAL */
     modalTitle: "Contact Me",
     modalName: "Name",
@@ -22,7 +39,12 @@ export const translations = {
     modalSuccess: "Message sent successfully!",
     modalError: "Error sending message. Please try again.",
     /* PROJECTS */
+    projectsEyebrow: "Selected work",
     projectsTitle: "Projects",
+    /* P-6 */
+    project6Title: "Cabarco",
+    project6Description: "Built a corporate website with an integrated product catalog and online store using WordPress, Elementor, and WooCommerce.",
+    project6Description2: "Modeled institutional content such as branches, team members, and testimonials with Custom Post Types and Advanced Custom Fields (ACF), and extended core functionality with custom PHP.",
     /* P-1 */
     project1Title: "Stekya",
     project1Description: "Developed a complete restaurant website using WordPress and Elementor, including custom-designed pages such as Orders, Reservations, Menu, and About.",
@@ -46,6 +68,7 @@ export const translations = {
     project5Description2: "Implemented file upload functionality, integrated MongoDB for data storage, and built server-side rendering using Handlebars.",
     project5Description3: "Includes email notifications and session management for handling user submissions.",
     /* CONTACT */
+    contactEyebrow: "Let's talk",
     contactTitle: "Let’s work together",
     contactSubtitle: "Have a project in mind or looking for a developer? I’d love to hear about it.",
     contactSubtitle2: "I’m always open to new opportunities where I can contribute, learn, and grow — whether it's building a full web application, improving an existing product, or collaborating as part of a team.",
@@ -56,15 +79,32 @@ export const translations = {
   es: {
     /* NAVBAR */
     navbarAbout: "Sobre mí",
+    navbarSkills: "Habilidades",
     navbarProjects: "Proyectos",
     navbarContact: "Contacto",
     /* HERO */
+    heroGreeting: "Hola, soy",
     heroSubtitle: "Analista en Sistemas & Desarrollador Full Stack",
+    heroCTAProjects: "Ver Proyectos",
+    heroCTAContact: "Contactame",
     /* ABOUT */
+    aboutEyebrow: "Conoceme un poco más",
     aboutTitle: "Sobre mí",
     aboutDescription1: "Me especializo en construir aplicaciones web escalables utilizando tecnologías modernas como React, Node.js y bases de datos SQL y NoSQL. Tengo experiencia práctica desarrollando proyectos del mundo real, incluyendo sistemas de gestión de tareas, herramientas de calificación de leads impulsadas por IA y plataformas web con autenticación, carga de archivos y flujos de trabajo automatizados.",
     aboutDescription2: "Me gradué como Analista de Sistemas en el IFTS N°18, donde desarrollé una sólida base en gestión de bases de datos, arquitectura de software y seguridad informática. Además de mi formación académica, he trabajado en proyectos freelance y continúo mejorando mis habilidades a través del desarrollo práctico.",
     aboutButton: "Ponte en contacto!",
+    aboutStatDegree: "Título de Analista de Sistemas",
+    aboutStatProjects: "Proyectos reales entregados",
+    aboutStatFocus: "Foco en desarrollo web",
+    /* SKILLS */
+    skillsEyebrow: "Con qué trabajo",
+    skillsTitle: "Habilidades y Tecnologías",
+    skillsCatFrontend: "Frontend",
+    skillsCatBackend: "Backend & APIs",
+    skillsCatDatabases: "Bases de Datos",
+    skillsCatCms: "CMS & E-commerce",
+    skillsCatAuth: "Autenticación & Utilidades",
+    skillsCatMarketing: "Marketing & Automatización",
     /* MODAL */
     modalTitle: "Contactame",
     modalName: "Nombre",
@@ -76,7 +116,12 @@ export const translations = {
     modalSuccess: "¡Mensaje enviado con éxito!",
     modalError: "Error al enviar el mensaje. Por favor, inténtalo de nuevo.",
     /* PROJECTS */
+    projectsEyebrow: "Trabajos seleccionados",
     projectsTitle: "Proyectos",
+    /* P-6 */
+    project6Title: "Cabarco",
+    project6Description: "Desarrollé un sitio web corporativo con catálogo de productos y tienda online integrada usando WordPress, Elementor y WooCommerce.",
+    project6Description2: "Modelé contenido institucional como sucursales, equipo y testimonios mediante Custom Post Types y Advanced Custom Fields (ACF), y extendí la funcionalidad del sitio con PHP personalizado.",
     /* P-1 */
     project1Title: "Stekya",
     project1Description: "Desarrollé un sitio web completo para restaurante usando WordPress y Elementor, incluyendo páginas personalizadas de Pedidos, Reservas, Menú y Nosotros.",
@@ -100,6 +145,7 @@ export const translations = {
     project5Description2: "Carga de archivos, almacenamiento en MongoDB y renderizado del lado del servidor con Handlebars.",
     project5Description3: "Incluye notificaciones por email y gestión de sesiones.",
     /* CONTACT */
+    contactEyebrow: "Hablemos",
     contactTitle: "Trabajemos juntos!",
     contactSubtitle: "¿Tenés un proyecto en mente o estás buscando un desarrollador? Me encantaría conocer más al respecto.",
     contactSubtitle2: "Siempre estoy abierto a nuevas oportunidades donde pueda aportar, aprender y crecer — ya sea desarrollando una aplicación web completa, mejorando un producto existente o colaborando como parte de un equipo.",
